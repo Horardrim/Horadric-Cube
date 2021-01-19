@@ -36,8 +36,7 @@ jobs:
           make rpm
 
       - name: Create Tag
-        uses: negz/create-tag@v1
-        run: echo ${{ steps.tag_version.outputs.result }}
+        uses: tvdias/github-tagger@v0.0.1
         with:
-          version: ${{ steps.tag_version.outputs.result }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.tag_version.outputs.result }}
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
