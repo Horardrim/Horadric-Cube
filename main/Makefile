@@ -5,7 +5,7 @@ OBJS := $(SRC:./%.c=./$(BUILD_OUTPUT_DIR)/%.o)
 DEPS := $(SRC:./%.c=./$(BUILD_OUTPUT_DIR)/%.d)
 
 CFLAGS = -g -Wall -Werror -fPIC -shared
-INCLUDE_PATH = 
+INCLUDE_PATH =
 LD_FLAGS =
 VERSION = ${HM_CUBE_VERSION}
 
@@ -13,7 +13,9 @@ VERSION = ${HM_CUBE_VERSION}
 all: ${BUILD_OUTPUT_DIR}/${TARGET}
 
 ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(MAKECMDGOALS),package)
 -include $(DEPS)
+endif
 endif
 
 ${BUILD_OUTPUT_DIR}/%.d: %.c
@@ -29,6 +31,15 @@ ${BUILD_OUTPUT_DIR}/${TARGET}: ${OBJS}
 	@ln -s ${BUILD_OUTPUT_DIR}/${TARGET}.${VERSION} ${BUILD_OUTPUT_DIR}/${TARGET}
 
 clean:
-	@rm -rf ${BUILD_OUTPUT_DIR} 
+	@rm -rf ${BUILD_OUTPUT_DIR}
+	@rm -rf ../rpmbuild/BUILD ../rpmbuild/BUILDROOT ../rpmbuild/SOURCES ../rpmbuild/RPMS ../rpmbuild/SRPMS
 
-.PHONY: all clean
+package:
+	@mkdir -p hm-cube-c-${HM_CUBE_VERSION}
+	@cp *.h *.c Makefile hm-cube-c-${HM_CUBE_VERSION}
+	@tar -czvf hm-cube-c-${HM_CUBE_VERSION}.tar.gz hm-cube-c-${HM_CUBE_VERSION}
+	@mkdir -p ../rpmbuild/SOURCES
+	@mv hm-cube-c-${HM_CUBE_VERSION}.tar.gz ../rpmbuild/SOURCES
+	@rm -rf hm-cube-c-${HM_CUBE_VERSION}
+
+.PHONY: all clean package
