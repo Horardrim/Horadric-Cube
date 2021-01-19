@@ -37,6 +37,7 @@ jobs:
 
       - name: Create Tag
         uses: negz/create-tag@v1
+        run: echo ${{ steps.tag_version.outputs.result }}
         with:
           version: ${{ steps.tag_version.outputs.result }}
           token: ${{ secrets.GITHUB_TOKEN }}
