@@ -27,12 +27,11 @@ jobs:
         id: tag_version
         run: |
           . setup.sh
-          echo "$HM_CUBE_VERSION"
+          return "$HM_CUBE_VERSION"
 
       # Runs a set of commands using the runners shell
       - name: Package and deploy rpm
         run: |
-          echo ${{ steps.tag_version.outputs.result }}
           . setup.sh
           make rpm
 
