@@ -53,3 +53,7 @@ dkms.conf
 
 # build temporary directory
 output
+BUILD
+RPMS
+SRPMS
+SOURCES
