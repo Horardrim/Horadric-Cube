@@ -37,4 +37,3 @@ ln -s /usr/lib/libhm-cube-c.so.%{version} /usr/lib/libhm-cube-c.so
 /usr/include/cube/*.h
 /usr/lib/libhm-cube-c.so.%{version}
 /usr/lib/libhm-cube-c.so
-
