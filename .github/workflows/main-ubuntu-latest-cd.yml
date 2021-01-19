@@ -31,7 +31,9 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Package and deploy rpm
-        run: make rpm
+        run: |
+          echo "$HM_CUBE_VERSION"
+          make rpm
 
       - name: Create Tag
         uses: negz/create-tag@v1
