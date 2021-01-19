@@ -33,7 +33,7 @@ jobs:
         run: make rpm
 
       - name: Push tag
-        id: ${HM_CUBE_VERSION}
+        id: {{ $HM_CUBE_VERSION }}
         uses: mathieudutour/github-tag-action@v5.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
