@@ -57,6 +57,12 @@ jobs:
           package: Horadric-Cube
           package_root: .debian
           maintainer: Horadrim
-          version: ${{ steps.tag_version.outputs.cube_version }}
+          version: ${{ steps.tag_version.outputs.cube_version }}-SNAPSHOT
           arch: any
           desc: 'Package of Horadric Cube a application to test github actions'
+
+      - name: Deploy debian
+        uses: actions/upload-artifact@v2
+        with:
+          name: hm-cube-${{ steps.tag_version.outputs.cube_version }}-snapshot-deb
+          path: Horadric-Cube_${{ steps.tag_version.outputs.cube_version }}-SNAPSHOT_any.deb
