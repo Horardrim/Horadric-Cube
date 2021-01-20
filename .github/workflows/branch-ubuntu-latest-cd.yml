@@ -35,21 +35,11 @@ jobs:
           . setup.sh
           make rpm
 
-      - name: Display Arch
+      - name: Get Arch
         id: arch_job
         run: |
-          echo ::set-output name=arch::$(arch)
-          echo ${{ steps.arch_job.outputs.arch }}
+          echo ::set-output name=architecture::$(arch)
 
-
-      - name: Create Tag
-        uses: tvdias/github-tagger@v0.0.1
-        with:
-          tag: ${{ steps.tag_version.outputs.cube_version }}
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Deploy binary
-        uses: actions/upload-artifact@v2
-        with:
-          name: hm-cube-${{ steps.tag_version.outputs.cube_version }}.rpm
-          path: rpmbuild/RPMS/*
+      - name: Display Arch
+        run: |
+          echo ${{ steps.arch_job.outputs.architecture }}
