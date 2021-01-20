@@ -46,9 +46,10 @@ jobs:
 
       - name: Prepare building debian
         run: |
-          mkdir -p .debian/usr/local/lib
+          mkdir -p .debian/usr/lib/cube
           mkdir -p .debian/usr/include/cube
-          cp output/libhm-cube-c.so.${{ steps.tag_version.outputs.cube_version }} .debian/usr/local/lib
+          cp output/libhm-cube-c.so.${{ steps.tag_version.outputs.cube_version }} .debian/usr/lib/cube
+          ln -s .debian/usr/lib/cube/libhm-cube-c.so.${{ steps.tag_version.outputs.cube_version }} .debian/usr/lib/cube/libhm-cube-c.so
           cp main/*.h .debian/usr/include/cube
 
       - name: Build debian
