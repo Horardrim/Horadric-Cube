@@ -37,7 +37,9 @@ jobs:
 
       - name: Display Arch
         id: arch_job
-        run: echo ${{ matrix.arch }}
+        run: |
+          echo ::set-output name=arch::$(arch)
+          echo ${{ steps.arch_job.outputs.arch }}
 
 
       - name: Create Tag
