@@ -35,6 +35,11 @@ jobs:
           . setup.sh
           make rpm
 
+      - name: Display Arch
+        id: arch_job
+        run: echo ${{ matrix.arch }}
+
+
       - name: Create Tag
         uses: tvdias/github-tagger@v0.0.1
         with:
