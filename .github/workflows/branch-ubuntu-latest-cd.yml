@@ -33,7 +33,7 @@ jobs:
       - name: Package and deploy rpm
         run: |
           . setup.sh
-          make rpm
+          make
 
       - name: Get Arch
         id: arch_job
@@ -43,3 +43,20 @@ jobs:
       - name: Display Arch
         run: |
           echo ${{ steps.arch_job.outputs.architecture }}
+
+      - name: Prepare building debian
+        run: |
+          mkdir -p .debian/usr/local/lib
+          mkdir -p .debian/usr/include
+          cp output/libhm-cube-c.so.${{ steps.tag_version.outputs.cube_version }} .debian/usr/local/lib
+          cp main/*.h .debian/usr/include
+
+      - name: Build debian
+        uses: jiro4989/build-deb-action@v2
+        with:
+          package: Horadric-Cube
+          package_root: .debian
+          maintainer: Horadrim
+          version: ${{ steps.tag_version.outputs.cube_version }}
+          arch: ${{ steps.arch_job.outputs.architecture }}
+          desc: 'Package of Horadric Cube a application to test github actions'
