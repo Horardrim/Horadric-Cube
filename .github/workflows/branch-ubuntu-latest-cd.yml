@@ -58,7 +58,7 @@ jobs:
           package_root: .debian
           maintainer: Horadrim
           version: ${{ steps.tag_version.outputs.cube_version }}-SNAPSHOT
-          arch: any
+          arch: amd64
           desc: 'Package of Horadric Cube a application to test github actions'
 
       - name: Deploy debian
