@@ -35,19 +35,21 @@ jobs:
           . setup.sh
           make
 
-      - name: Get Arch
-        id: arch_job
-        run: |
-          echo ::set-output name=architecture::$(arch)
+      # - name: Get Arch
+      #   id: arch_job
+      #   run: |
+      #     echo ::set-output name=architecture::$(arch)
 
-      - name: Display Arch
-        run: |
-          echo ${{ steps.arch_job.outputs.architecture }}
+      # - name: Display Arch
+      #   run: |
+      #     echo ${{ steps.arch_job.outputs.architecture }}
 
       - name: Prepare building debian
         run: |
           mkdir -p .debian/usr/lib/cube
           mkdir -p .debian/usr/include/cube
+          mkdir -p .debian/etc/ld.so.conf.d
+          echo "/usr/lib/cube" > .debian/etc/ld.so.conf.d/ld.so.cube.conf
           cp output/libhm-cube-c.so.${{ steps.tag_version.outputs.cube_version }} .debian/usr/lib/cube
           ln -s .debian/usr/lib/cube/libhm-cube-c.so.${{ steps.tag_version.outputs.cube_version }} .debian/usr/lib/cube/libhm-cube-c.so
           cp main/*.h .debian/usr/include/cube
