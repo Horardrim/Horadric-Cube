@@ -30,19 +30,14 @@ jobs:
           echo "::set-output name=cube_version::$HM_CUBE_VERSION"
 
       # Runs a set of commands using the runners shell
-      - name: Package and deploy rpm
+      - name: Package deb package
         run: |
           . setup.sh
-          make rpm
+          make
+          make deb
 
-      - name: Create Tag
-        uses: tvdias/github-tagger@v0.0.1
-        with:
-          tag: ${{ steps.tag_version.outputs.cube_version }}
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Deploy binary
+      - name: Deploy debian
         uses: actions/upload-artifact@v2
         with:
-          name: hm-cube-${{ steps.tag_version.outputs.cube_version }}.rpm
-          path: rpmbuild/RPMS/*
+          name: hm-cube-${{ steps.tag_version.outputs.cube_version }}-snapshot-deb
+          path: Horadric-Cube-${{ steps.tag_version.outputs.cube_version }}_amd64.deb
