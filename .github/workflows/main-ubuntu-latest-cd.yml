@@ -42,8 +42,8 @@ jobs:
           tag: ${{ steps.tag_version.outputs.cube_version }}
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Deploy binary
+      - name: Deploy debian
         uses: actions/upload-artifact@v2
         with:
-          name: hm-cube-${{ steps.tag_version.outputs.cube_version }}
-          path: rpmbuild/RPMS/*
+          name: hm-cube-${{ steps.tag_version.outputs.cube_version }}-deb
+          path: Horadric-Cube-${{ steps.tag_version.outputs.cube_version }}_amd64.deb
