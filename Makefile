@@ -12,6 +12,6 @@ rpm:
 
 deb:
 	@make -C main prepdebinstenv
-	@dpkg -b Horadric-Cube-${HM_CUBE_VERSION}
+	@dpkg -b Horadric-Cube-${HM_CUBE_VERSION} Horadric-Cube-${HM_CUBE_VERSION}_amd64.deb
 
 .PHONY: clean all rpm deb

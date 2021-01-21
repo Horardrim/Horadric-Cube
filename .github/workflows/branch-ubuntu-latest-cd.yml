@@ -30,42 +30,14 @@ jobs:
           echo "::set-output name=cube_version::$HM_CUBE_VERSION"
 
       # Runs a set of commands using the runners shell
-      - name: Package and deploy rpm
+      - name: Package deb package
         run: |
           . setup.sh
           make
-
-      # - name: Get Arch
-      #   id: arch_job
-      #   run: |
-      #     echo ::set-output name=architecture::$(arch)
-
-      # - name: Display Arch
-      #   run: |
-      #     echo ${{ steps.arch_job.outputs.architecture }}
-
-      - name: Prepare building debian
-        run: |
-          mkdir -p .debian/usr/lib/cube
-          mkdir -p .debian/usr/include/cube
-          mkdir -p .debian/etc/ld.so.conf.d
-          cp ld.cube.conf .debian/etc/ld.so.conf.d/ld.cube.conf
-          cp output/libhm-cube-c.so.${{ steps.tag_version.outputs.cube_version }} .debian/usr/lib/cube
-          ln -s .debian/usr/lib/cube/libhm-cube-c.so.${{ steps.tag_version.outputs.cube_version }} .debian/usr/lib/cube/libhm-cube-c.so
-          cp main/*.h .debian/usr/include/cube
-
-      - name: Build debian
-        uses: jiro4989/build-deb-action@v2
-        with:
-          package: Horadric-Cube
-          package_root: .debian
-          maintainer: Horadrim
-          version: ${{ steps.tag_version.outputs.cube_version }}-SNAPSHOT
-          arch: amd64
-          desc: 'Package of Horadric Cube a application to test github actions'
+          make deb
 
       - name: Deploy debian
         uses: actions/upload-artifact@v2
         with:
           name: hm-cube-${{ steps.tag_version.outputs.cube_version }}-snapshot-deb
-          path: Horadric-Cube_${{ steps.tag_version.outputs.cube_version }}-SNAPSHOT_amd64.deb
+          path: Horadric-Cube-${{ steps.tag_version.outputs.cube_version }}_amd64.deb
