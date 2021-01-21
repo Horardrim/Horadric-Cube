@@ -49,7 +49,7 @@ jobs:
           mkdir -p .debian/usr/lib/cube
           mkdir -p .debian/usr/include/cube
           mkdir -p .debian/etc/ld.so.conf.d
-          echo "/usr/lib/cube" > .debian/etc/ld.so.conf.d/ld.so.cube.conf
+          cp ld.cube.conf .debian/etc/ld.so.conf.d/ld.cube.conf
           cp output/libhm-cube-c.so.${{ steps.tag_version.outputs.cube_version }} .debian/usr/lib/cube
           ln -s .debian/usr/lib/cube/libhm-cube-c.so.${{ steps.tag_version.outputs.cube_version }} .debian/usr/lib/cube/libhm-cube-c.so
           cp main/*.h .debian/usr/include/cube
