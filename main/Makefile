@@ -9,7 +9,6 @@ INCLUDE_PATH =
 LD_FLAGS =
 VERSION = ${HM_CUBE_VERSION}
 
-
 all: ${BUILD_OUTPUT_DIR}/${TARGET}
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -61,4 +60,10 @@ prepdebinstenv:
 	@cp ../output/libhm-cube-c.so.* ../Horadric-Cube-${HM_CUBE_VERSION}/usr/lib/cube
 	@touch ../Horadric-Cube-${HM_CUBE_VERSION}/usr/lib/cube/libhm-cube-c.so
 
-.PHONY: all clean package prepdebinstenv
+build-gov: CFLAGS = -g -Wall -Werror -fprofile-arcs -ftest-coverage
+
+build-gov: LD_FLAGS = -fprofile-arcs -ftest-coverage -lgov
+
+build-gov: ${OBJS}
+
+.PHONY: all clean package prepdebinstenv build-gov

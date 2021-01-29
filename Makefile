@@ -1,10 +1,9 @@
 all:
 	@make -C main
-	@make -C test
 
 clean:
 	@make -C main clean
-	@make -C test clean
+	@rm -rf *.info
 
 rpm:
 	@make -C main package
@@ -14,4 +13,12 @@ deb:
 	@make -C main prepdebinstenv
 	@dpkg -b Horadric-Cube-${HM_CUBE_VERSION} Horadric-Cube-${HM_CUBE_VERSION}_amd64.deb
 
-.PHONY: clean all rpm deb
+verify:
+	@make -C main build-gov
+	@make -C test build-
+	@lcov -c -i -d ./ -o init.info
+	@./output/hm-cube-c-unit-test
+	@lcov -c -d ./ -o cover.info
+	@lcov -a init.info -a cover.info -o total.info
+
+.PHONY: clean all rpm deb verify
