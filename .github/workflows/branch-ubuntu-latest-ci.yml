@@ -35,7 +35,7 @@ jobs:
         run: make verify
 
       - name: generate coverage
-        uses: manar.benkraoda/lcov-reporter-action@v0.3.5.3
+        uses: romeovs/lcov-reporter-action@v0.2.16
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           lcov-file: total.info
