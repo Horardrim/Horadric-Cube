@@ -35,7 +35,7 @@ jobs:
         run: make verify
 
       - name: generate coverage
-        uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
+        uses: manar.benkraoda/lcov-reporter-action@v0.3.5.3
         with:
-          path: "total.info"
-          min_coverage: 80
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          lcov-file: total.info
