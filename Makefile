@@ -15,7 +15,7 @@ deb:
 
 verify:
 	@make -C main build-gov
-	@make -C test build-
+	@make -C test build-gov
 	@lcov -c -i -d ./ -o init.info
 	@./output/hm-cube-c-unit-test
 	@lcov -c -d ./ -o cover.info
