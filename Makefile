@@ -18,6 +18,8 @@ verify:
 	@make -C test build-gov
 	@lcov -c -i -d ./ -o init.info
 	@./output/hm-cube-c-unit-test
+	@cp `find main -name '*.c'` output/
+	@cp `find test -name '*.c'` output/
 	@lcov -c -d ./ -o cover.info
 	@lcov -a init.info -a cover.info -o total.info
 
