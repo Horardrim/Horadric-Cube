@@ -17,7 +17,8 @@ verify:
 	@make -C main build-gov
 	@make -C test build-gov
 	@lcov -c -i -d ./ -o init.info
-	@./output/hm-cube-c-unit-test
+	@valgrind --leak-check=full --show-reachable=yes -v ./output/hm-cube-c-unit-test 2>&1 | tee valgrind.log
+	@grep "0 errors from 0 contexts" valgrind.log
 	@cp `find main -name '*.c'` output/
 	@cp `find test -name '*.c'` output/
 	@lcov -c -d ./ -o cover.info
