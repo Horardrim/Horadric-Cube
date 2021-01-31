@@ -57,3 +57,7 @@ BUILD
 RPMS
 SRPMS
 SOURCES
+
+# build log
+*.info
+*.log
