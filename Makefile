@@ -4,6 +4,7 @@ all:
 clean:
 	@make -C main clean
 	@rm -rf *.info
+	@rm -rf valgrind.log
 
 rpm:
 	@make -C main package
