@@ -21,7 +21,7 @@ verify:
 	@valgrind --leak-check=full --show-reachable=yes -v ./output/hm-cube-c-unit-test 2>&1 | tee valgrind.log
 	@grep "0 errors from 0 contexts" valgrind.log
 	@cp `find main -name '*.c'` output/
-	@cp `find test -name '*.c'` output/
+	@cp test/libhm_cube_unittest.c output/
 	@lcov -c -d ./ -o cover.info
 	@lcov -a init.info -a cover.info -o total.info
 
