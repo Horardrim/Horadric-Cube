@@ -28,7 +28,6 @@ jobs:
         with:
           version: 4.8
           platform: any
-          cc: gcc
 
       - name: Show gcc version
         run: |
