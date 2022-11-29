@@ -23,12 +23,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Set up GCC/G++
-        uses: egor-tensin/setup-gcc@v1
-        with:
-          version: 4.8
-          platform: any
-
       - name: Show gcc version
         run: |
           gcc -v
